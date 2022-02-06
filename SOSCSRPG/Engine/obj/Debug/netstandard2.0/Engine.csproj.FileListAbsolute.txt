@@ -1,9 +1,0 @@
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\bin\Debug\netstandard2.0\Engine.deps.json
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\bin\Debug\netstandard2.0\Engine.dll
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\bin\Debug\netstandard2.0\Engine.pdb
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.csprojAssemblyReference.cache
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.csproj.CoreCompileInputs.cache
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.AssemblyInfoInputs.cache
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.AssemblyInfo.cs
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.dll
-C:\Users\Nikolay\Documents\GitHub\SOSCSRPG\SOSCSRPG\Engine\obj\Debug\netstandard2.0\Engine.pdb
