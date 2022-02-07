@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Engine.Models;
+using Engine.Factories;
 
 namespace Engine.ViewModels
 {
     public class GameSession
     {
+        public World CurrentWorld { get; set; }
         public Player CurrentPlayer { get; set; }
         public Location CurrentLocation { get; set; }
 
@@ -21,12 +23,10 @@ namespace Engine.ViewModels
             CurrentPlayer.ExperiencePoints = 0;
             CurrentPlayer.Level = 1;
 
-            CurrentLocation = new Location();
-            CurrentLocation.Name = "Дом";
-            CurrentLocation.XCoordinate = 0;
-            CurrentLocation.YCoordinate = -1;
-            CurrentLocation.Description = "Это твой дом";
-            CurrentLocation.ImageName = "/Engine;component/Images/Locations/Home.png";
+            WorldFactory factory = new WorldFactory();
+            CurrentWorld = factory.CreateWorld();
+
+            CurrentLocation = CurrentWorld.LocationAt(0, -1);
         }
     }
 }
