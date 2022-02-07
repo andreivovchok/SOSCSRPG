@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Engine.Models
 {
@@ -16,7 +13,7 @@ namespace Engine.Models
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 _name = value;
@@ -26,7 +23,7 @@ namespace Engine.Models
 
         public string CharacterClass
         {
-            get { return _characterClass; }
+            get => _characterClass;
             set
             {
                 _characterClass = value;
@@ -36,7 +33,7 @@ namespace Engine.Models
 
         public int HitPoints
         {
-            get { return _hitPoints; }
+            get => _hitPoints;
             set
             {
                 _hitPoints = value;
@@ -46,7 +43,7 @@ namespace Engine.Models
 
         public int ExperiencePoints
         {
-            get { return _experiencePoints;}
+            get => _experiencePoints;
             set
             {
                 _experiencePoints = value;
@@ -56,7 +53,7 @@ namespace Engine.Models
 
         public int Level
         {
-            get { return _level; }
+            get => _level;
             set
             {
                 _level = value;
@@ -66,7 +63,7 @@ namespace Engine.Models
 
         public int Gold
         {
-            get { return _gold; }
+            get => _gold;
             set
             {
                 _gold = value;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Engine.Models;
+﻿using Engine.Models;
 using Engine.Factories;
 
 namespace Engine.ViewModels
@@ -15,13 +12,15 @@ namespace Engine.ViewModels
 
         public GameSession()
         {
-            CurrentPlayer = new Player();
-            CurrentPlayer.Name = "Scott";
-            CurrentPlayer.CharacterClass = "Fighter";
-            CurrentPlayer.HitPoints = 10;
-            CurrentPlayer.Gold = 10000000;
-            CurrentPlayer.ExperiencePoints = 0;
-            CurrentPlayer.Level = 1;
+            CurrentPlayer = new Player
+            {
+                Name = "Scott",
+                CharacterClass = "Fighter",
+                HitPoints = 10,
+                Gold = 10000000,
+                ExperiencePoints = 0,
+                Level = 1
+            };
 
             WorldFactory factory = new WorldFactory();
             CurrentWorld = factory.CreateWorld();
