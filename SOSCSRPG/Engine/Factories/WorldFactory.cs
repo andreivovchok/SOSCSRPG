@@ -24,27 +24,27 @@ namespace Engine.Factories
                 "/Engine;component/Images/Locations/Home.png");
 
             newWorld.AddLocation(0, 0, "Городская площадь",
-                "", 
+                "Вы видите здесь фонтан.", 
                 "/Engine;component/Images/Locations/TownSquare.png");
 
-            newWorld.AddLocation(0, 1, "Хижина лекарей", 
-                "",
+            newWorld.AddLocation(0, 1, "Хижина лекарей",
+                "Вы видите маленькую хижину с сохнущими на крыше растениями.",
                 "/Engine;component/Images/Locations/HerbalistsHut.png");
 
             newWorld.AddLocation(0, 2, "Травяной сад",
                 "В этом саду растет много лекарственных трав",
                 "/Engine;component/Images/Locations/HerbalistsGarden.png");
 
-            newWorld.AddLocation(-1, 0, "Торговый магазин", 
-                "В этом магазине можно покупать и продавать предметы",
+            newWorld.AddLocation(-1, 0, "Торговый магазин",
+                "Лавка торговки Сьюзен.",
                 "/Engine;component/Images/Locations/Trader.png");
 
             newWorld.AddLocation(1, 0, "Городские ворота",
-                "",
+                "Здесь есть ворота, защищающие город от гигантских пауков.",
                 "/Engine;component/Images/Locations/TownGate.png");
 
             newWorld.AddLocation(2, 0, "Паучий лес",
-                "",
+                "Деревья в этом лесу покрыты паутиной",
                 "/Engine;component/Images/Locations/SpiderForest.png");
 
             return newWorld;

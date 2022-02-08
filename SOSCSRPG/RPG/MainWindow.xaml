@@ -91,6 +91,7 @@
                            Source="{Binding CurrentLocation.ImageName}"/>
 
                     <TextBlock Grid.Row="2"
+                               TextWrapping="Wrap"
                                HorizontalAlignment="Center"
                                Text="{Binding CurrentLocation.Description}"/>
 
