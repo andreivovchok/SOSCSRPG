@@ -15,7 +15,7 @@ namespace Engine.Factories
                 "Здесь растут ряды кукурузы, между которыми прячутся гигантские крысы",
                 "/Engine;component/Images/Locations/FarmFields.png");
 
-            newWorld.AddLocation(-1, 1, "Дом Фермера",
+            newWorld.AddLocation(-1, -1, "Дом Фермера",
                 "Это дом твоего соседа, фермера Теда",
                 "/Engine;component/Images/Locations/Farmhouse.png");
 

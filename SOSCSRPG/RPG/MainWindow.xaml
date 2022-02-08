@@ -121,10 +121,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="1" Content="Север"/>
-                <Button Grid.Row="1" Grid.Column="0" Content="Запад"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="Восток"/>
-                <Button Grid.Row="2" Grid.Column="1" Content="Юг"/>
+                <Button Grid.Row="0" Grid.Column="1"
+                        Height="25" Width="65" Margin="0,50,0,0"
+                        Click="OnClick_MoveNorth"
+                        Content="Север"/>
+                <Button Grid.Row="1" Grid.Column="0"
+                        Height="25" Width="65" Margin="10,0,0,0"
+                        Click="OnClick_MoveWest"
+                        Content="Запад"/>
+                <Button Grid.Row="1" Grid.Column="2"
+                        Height="25" Width="65" Margin="0,0,10,0"
+                        Click="OnClick_MoveEast"
+                        Content="Восток"/>
+                <Button Grid.Row="2" Grid.Column="1"
+                        Height="25" Width="65" Margin="0,0,0,50"
+                        Click="OnClick_MoveSouth"
+                        Content="Юг"/>
 
             </Grid>
 
