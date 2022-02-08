@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         FontSize="11pt"
         Title="Scott's Awesome Game" Height="768" Width="1024">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -124,18 +129,22 @@
                 <Button Grid.Row="0" Grid.Column="1"
                         Height="25" Width="65" Margin="0,50,0,0"
                         Click="OnClick_MoveNorth"
+                        Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"
                         Content="Север"/>
                 <Button Grid.Row="1" Grid.Column="0"
                         Height="25" Width="65" Margin="10,0,0,0"
                         Click="OnClick_MoveWest"
+                        Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"
                         Content="Запад"/>
                 <Button Grid.Row="1" Grid.Column="2"
                         Height="25" Width="65" Margin="0,0,10,0"
                         Click="OnClick_MoveEast"
+                        Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"
                         Content="Восток"/>
                 <Button Grid.Row="2" Grid.Column="1"
                         Height="25" Width="65" Margin="0,0,0,50"
                         Click="OnClick_MoveSouth"
+                        Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"
                         Content="Юг"/>
 
             </Grid>
