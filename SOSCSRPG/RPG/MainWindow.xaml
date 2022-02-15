@@ -120,7 +120,7 @@
                 </TabItem>
 
                 <TabItem Header="Quests">
-                    <DataGrid ItemsSource="{Binding CurrentPlayer.Quests}"
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Quest}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
