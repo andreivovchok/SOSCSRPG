@@ -31,6 +31,8 @@ namespace Engine.Factories
                 "Вы видите маленькую хижину с сохнущими на крыше растениями.",
                 "/Engine;component/Images/Locations/HerbalistsHut.png");
 
+            newWorld.LocationAt(0,1).QuestAvailableHere.Add(QuestFactory.GetQuestByID(1));
+
             newWorld.AddLocation(0, 2, "Травяной сад",
                 "В этом саду растет много лекарственных трав",
                 "/Engine;component/Images/Locations/HerbalistsGarden.png");
