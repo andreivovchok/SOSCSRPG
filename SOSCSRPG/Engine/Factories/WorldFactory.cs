@@ -15,6 +15,8 @@ namespace Engine.Factories
                 "Здесь растут ряды кукурузы, между которыми прячутся гигантские крысы",
                 "/Engine;component/Images/Locations/FarmFields.png");
 
+            newWorld.LocationAt(-2,-1).AddMonster(2,100);
+
             newWorld.AddLocation(-1, -1, "Дом Фермера",
                 "Это дом твоего соседа, фермера Теда",
                 "/Engine;component/Images/Locations/Farmhouse.png");
@@ -37,6 +39,8 @@ namespace Engine.Factories
                 "В этом саду растет много лекарственных трав",
                 "/Engine;component/Images/Locations/HerbalistsGarden.png");
 
+            newWorld.LocationAt(0,2).AddMonster(1,100);
+
             newWorld.AddLocation(-1, 0, "Торговый магазин",
                 "Лавка торговки Сьюзен.",
                 "/Engine;component/Images/Locations/Trader.png");
@@ -48,6 +52,8 @@ namespace Engine.Factories
             newWorld.AddLocation(2, 0, "Паучий лес",
                 "Деревья в этом лесу покрыты паутиной",
                 "/Engine;component/Images/Locations/SpiderForest.png");
+
+            newWorld.LocationAt(2,0).AddMonster(3,100);
 
             return newWorld;
         }
