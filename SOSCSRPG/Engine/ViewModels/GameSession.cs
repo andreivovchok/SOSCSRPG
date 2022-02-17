@@ -9,7 +9,7 @@ namespace Engine.ViewModels
 {
     public class GameSession : BaseNotificationClass
     {
-        public event EventHandler<GameMessagesEventArgs> OnMessagesRaised;
+        public event EventHandler<GameMessagesEventArgs> OnMessageRaised;
 
         private Location _currentLocation;
         private Monster _currentMonster;
@@ -43,6 +43,12 @@ namespace Engine.ViewModels
 
                 OnPropertyChanged(nameof(CurrentMonster));
                 OnPropertyChanged(nameof(HasMonster));
+
+                if (CurrentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"Здесь ты видешь {CurrentMonster.Name}");
+                }
             }
         }
 
@@ -135,9 +141,9 @@ namespace Engine.ViewModels
             CurrentMonster = CurrentLocation.GetMonster();
         }
 
-        private void RaiseMesaage(string message)
+        private void RaiseMessage(string message)
         {
-            OnMessagesRaised?.Invoke(this, new GameMessagesEventArgs(message));
+            OnMessageRaised?.Invoke(this, new GameMessagesEventArgs(message));
         }
     }
 }

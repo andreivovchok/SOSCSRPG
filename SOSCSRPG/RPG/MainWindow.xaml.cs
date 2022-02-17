@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Documents;
+using Engine.EventArgs;
 using Engine.ViewModels;
 
 namespace RPG
@@ -16,9 +19,11 @@ namespace RPG
 
             _gameSession = new GameSession();
 
+            _gameSession.OnMessageRaised += OnGameMessageRaised;
+
             DataContext = _gameSession;
-        } 
-        
+        }
+
         private void OnClick_MoveNorth(object sender, RoutedEventArgs e)
         {
             _gameSession.MoveNorth();
@@ -37,6 +42,12 @@ namespace RPG
         private void OnClick_MoveSouth(object sender, RoutedEventArgs e)
         {
             _gameSession.MoveSouth();
+        }
+
+        private void OnGameMessageRaised(object sender, GameMessagesEventArgs e)
+        {
+            GameMassages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
+            GameMassages.ScrollToEnd();
         }
     }
 }
