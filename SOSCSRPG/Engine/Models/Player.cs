@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Engine.Models
 {
@@ -74,12 +76,22 @@ namespace Engine.Models
 
         public ObservableCollection<GameItem> Inventory { get; set; }
 
+        public List<GameItem> Weapons => 
+            Inventory.Where(i => i is Weapon).ToList();
+
         public ObservableCollection<QuestStatus> Quest { get; set; }
 
         public Player()
         {
             Inventory = new ObservableCollection<GameItem>();
             Quest = new ObservableCollection<QuestStatus>();
+        }
+
+        public void AddItemToInventory(GameItem item)
+        {
+            Inventory.Add(item);
+
+            OnPropertyChanged(nameof(Weapons));
         }
     }
 }
