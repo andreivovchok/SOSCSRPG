@@ -44,6 +44,11 @@ namespace RPG
             _gameSession.MoveSouth();
         }
 
+        private void OnClick_AttackMonster(object sender, RoutedEventArgs e)
+        {
+            _gameSession.AttackCurrentMonster();
+        }
+
         private void OnGameMessageRaised(object sender, GameMessagesEventArgs e)
         {
             GameMassages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));

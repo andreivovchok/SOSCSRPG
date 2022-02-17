@@ -37,7 +37,7 @@ namespace Engine.ViewModels
         public Monster CurrentMonster
         {
             get => _currentMonster;
-            set
+            private set
             {
                 _currentMonster = value;
 
@@ -51,6 +51,8 @@ namespace Engine.ViewModels
                 }
             }
         }
+
+        public Weapon CurrentWeapon { get; set; }
 
         public bool HasLocationToNorth
         {
@@ -144,6 +146,71 @@ namespace Engine.ViewModels
         private void RaiseMessage(string message)
         {
             OnMessageRaised?.Invoke(this, new GameMessagesEventArgs(message));
+        }
+
+        public void AttackCurrentMonster()
+        {
+            if (CurrentMonster == null)
+            {
+                RaiseMessage("Для атаки у вас должно быть оружие.");
+                return;
+            }
+
+            int damageToMonster =
+                RandomNumberGenerator.SimpleNumberBetween(CurrentWeapon.MinimumDamage, CurrentWeapon.MaximumDamage);
+            if (damageToMonster == 0)
+            {
+                RaiseMessage($"Ты промахнулся по {CurrentMonster.Name}.");
+            }
+            else
+            {
+                CurrentMonster.HitPoints -= damageToMonster;
+                RaiseMessage($"Ты нанес {CurrentMonster.Name} {damageToMonster} урона.");
+            }
+
+            if (CurrentMonster.HitPoints <= 0)
+            {
+                RaiseMessage("");
+                RaiseMessage($"Ты победил {CurrentMonster.Name}.");
+
+                CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
+                RaiseMessage($"Ты получил {CurrentMonster.RewardExperiencePoints} очков опыта.");
+
+                CurrentPlayer.Gold += CurrentMonster.RewardGold;
+                RaiseMessage($"Ты получил {CurrentMonster.RewardGold} золота.");
+
+                foreach (ItemQuantity itemQuantity in CurrentMonster.Inventory)
+                {
+                    GameItem item = ItemFactory.GreateGameItem(itemQuantity.ItemID);
+                    CurrentPlayer.AddItemToInventory(item);
+                    RaiseMessage($"Ты получил {itemQuantity.Quantity} {item.Name}.");
+                }
+
+                GetMonsterAtLocation();
+            }
+            else
+            {
+                int damageToPlayer = RandomNumberGenerator.SimpleNumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
+
+                if (damageToPlayer == 0)
+                {
+                    RaiseMessage("Монстр атаковал, но промахнулся.");
+                }
+                else
+                {
+                    CurrentPlayer.HitPoints -= damageToPlayer;
+                    RaiseMessage($"{CurrentMonster.Name} нанес тебе {damageToPlayer} урона.");
+                }
+
+                if (CurrentPlayer.HitPoints <= 0)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"{CurrentMonster.Name} убил тебя.");
+
+                    CurrentLocation = CurrentWorld.LocationAt(0, -1);
+                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10;
+                }
+            }
         }
     }
 }
