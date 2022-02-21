@@ -49,7 +49,7 @@
                                     IsReadOnly="True"
                                     Width="*"
                                     Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Стоимость"
+                <DataGridTextColumn Header="Цена"
                                     IsReadOnly="True"
                                     Width="Auto"
                                     Binding="{Binding Path=Price}"/>
@@ -57,7 +57,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="OnClick_Sell"
-                                    Width="55"
+                                    Width="65"
                                     Content="Продать"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -69,7 +69,7 @@
         <DataGrid Grid.Row="2" Grid.Column="1"
                   Margin="10"
                   ItemsSource="{Binding CurrentTrader.Inventory}"
-                  AutoGenerateColumns="True"
+                  AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
@@ -80,7 +80,7 @@
                                     IsReadOnly="True"
                                     Width="*"
                                     Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Стоимость"
+                <DataGridTextColumn Header="Цена"
                                     IsReadOnly="True"
                                     Width="Auto"
                                     Binding="{Binding Path=Price}"/>
