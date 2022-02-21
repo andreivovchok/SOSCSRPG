@@ -96,7 +96,8 @@ namespace Engine.ViewModels
             {
                 Name = "Scott",
                 CharacterClass = "Fighter",
-                HitPoints = 10,
+                CurrentHitPoints = 10,
+                MaximumHitPoints = 10,
                 Gold = 10000000,
                 ExperiencePoints = 0,
                 Level = 1
@@ -240,11 +241,11 @@ namespace Engine.ViewModels
             }
             else
             {
-                CurrentMonster.HitPoints -= damageToMonster;
+                CurrentMonster.CurrentHitPoints -= damageToMonster;
                 RaiseMessage($"Ты нанес {CurrentMonster.Name} {damageToMonster} урона.");
             }
 
-            if (CurrentMonster.HitPoints <= 0)
+            if (CurrentMonster.CurrentHitPoints <= 0)
             {
                 RaiseMessage("");
                 RaiseMessage($"Ты победил {CurrentMonster.Name}.");
@@ -252,14 +253,13 @@ namespace Engine.ViewModels
                 CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
                 RaiseMessage($"Ты получил {CurrentMonster.RewardExperiencePoints} очков опыта.");
 
-                CurrentPlayer.Gold += CurrentMonster.RewardGold;
-                RaiseMessage($"Ты получил {CurrentMonster.RewardGold} золота.");
+                CurrentPlayer.Gold += CurrentMonster.Gold;
+                RaiseMessage($"Ты получил {CurrentMonster.Gold} золота.");
 
-                foreach (ItemQuantity itemQuantity in CurrentMonster.Inventory)
+                foreach (GameItem gameItem in CurrentMonster.Inventory)
                 {
-                    GameItem item = ItemFactory.GreateGameItem(itemQuantity.ItemID);
-                    CurrentPlayer.AddItemToInventory(item);
-                    RaiseMessage($"Ты получил {itemQuantity.Quantity} {item.Name}.");
+                    CurrentPlayer.AddItemToInventory(gameItem);
+                    RaiseMessage($"Ты получил один {gameItem.Name}.");
                 }
 
                 GetMonsterAtLocation();
@@ -274,17 +274,17 @@ namespace Engine.ViewModels
                 }
                 else
                 {
-                    CurrentPlayer.HitPoints -= damageToPlayer;
+                    CurrentPlayer.CurrentHitPoints -= damageToPlayer;
                     RaiseMessage($"{CurrentMonster.Name} нанес тебе {damageToPlayer} урона.");
                 }
 
-                if (CurrentPlayer.HitPoints <= 0)
+                if (CurrentPlayer.CurrentHitPoints <= 0)
                 {
                     RaiseMessage("");
                     RaiseMessage($"{CurrentMonster.Name} убил тебя.");
 
                     CurrentLocation = CurrentWorld.LocationAt(0, -1);
-                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10;
+                    CurrentPlayer.CurrentHitPoints = CurrentPlayer.Level * 10;
                 }
             }
         }

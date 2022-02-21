@@ -55,7 +55,7 @@ namespace Engine.Factories
         {
             if (RandomNumberGenerator.SimpleNumberBetween(1,100) <= persentage)
             {
-                monster.Inventory.Add(new ItemQuantity(itemID, 1));
+                monster.AddItemToInventory(ItemFactory.GreateGameItem(itemID));
             }
         }
     }
