@@ -9,12 +9,10 @@ namespace Engine.Factories
 {
     public static class ItemFactory
     {
-        private static List<GameItem> _standardGameItems;
+        private static readonly List<GameItem> _standardGameItems = new List<GameItem>();
 
         static ItemFactory()
         {
-            _standardGameItems = new List<GameItem>();
-
             _standardGameItems.Add(new Weapon(1001, "Заостренная палка", 1, 1, 2));
             _standardGameItems.Add(new Weapon(1002, "Ржавый меч", 5, 1, 3));
             _standardGameItems.Add(new GameItem(9001, "Клык змеи", 1));
@@ -23,9 +21,6 @@ namespace Engine.Factories
             _standardGameItems.Add(new GameItem(9004, "Крысиный мех", 2));
             _standardGameItems.Add(new GameItem(9005, "Клык паука", 1));
             _standardGameItems.Add(new GameItem(9006, "Шелк паука", 2));
-
-
-
         }
 
         public static GameItem GreateGameItem(int itemTypeID)

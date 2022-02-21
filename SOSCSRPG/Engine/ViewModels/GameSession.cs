@@ -54,25 +54,21 @@ namespace Engine.ViewModels
 
         public Weapon CurrentWeapon { get; set; }
 
-        public bool HasLocationToNorth
-        {
-            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
-        }
+        public bool HasLocationToNorth => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
 
-        public bool HasLocationToWest
-        {
-            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
-        }
 
-        public bool HasLocationToEast
-        {
-            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
-        }
+        public bool HasLocationToWest => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
 
-        public bool HasLocationToSouth
-        {
-            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
-        }
+
+        public bool HasLocationToEast => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
+
+
+        public bool HasLocationToSouth => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
+        
 
         public bool HasMonster => CurrentMonster != null;
 
@@ -87,6 +83,8 @@ namespace Engine.ViewModels
                 ExperiencePoints = 0,
                 Level = 1
             };
+
+            CurrentPlayer.AddItemToInventory(ItemFactory.GreateGameItem(1001));
 
             CurrentWorld = WorldFactory.CreateWorld();
 
@@ -150,7 +148,7 @@ namespace Engine.ViewModels
 
         public void AttackCurrentMonster()
         {
-            if (CurrentMonster == null)
+            if (CurrentWeapon == null)
             {
                 RaiseMessage("Для атаки у вас должно быть оружие.");
                 return;
