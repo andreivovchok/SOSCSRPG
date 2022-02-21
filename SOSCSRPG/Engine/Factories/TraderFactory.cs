@@ -13,7 +13,7 @@ namespace Engine.Factories
 
         static TraderFactory()
         {
-            Trader susan = new Trader("Сюзанна");
+            Trader susan = new Trader("Сьюзен");
             susan.AddItemToInventory(ItemFactory.GreateGameItem(1001));
 
             Trader farmerTed = new Trader("Фермер Тед");

@@ -20,6 +20,8 @@ namespace Engine.Factories
             newWorld.AddLocation(-1, -1, "Дом Фермера",
                 "Это дом твоего соседа, фермера Теда",
                 "Farmhouse.png");
+            newWorld.LocationAt(-1, -1).TraderHere =
+                TraderFactory.GetTraderByName("Фермер Тед");
 
             newWorld.AddLocation(0, -1, "Дом",
                 "Это твой дом",
@@ -38,12 +40,16 @@ namespace Engine.Factories
             newWorld.AddLocation(0, 2, "Травяной сад",
                 "В этом саду растет много лекарственных трав",
                 "HerbalistsGarden.png");
+            newWorld.LocationAt(0, 2).TraderHere =
+                TraderFactory.GetTraderByName("Травник Пит");
 
             newWorld.LocationAt(0,2).AddMonster(1,100);
 
             newWorld.AddLocation(-1, 0, "Торговый магазин",
                 "Лавка торговки Сьюзен.",
                 "Trader.png");
+            newWorld.LocationAt(-1, 0).TraderHere =
+                TraderFactory.GetTraderByName("Сьюзен");
 
             newWorld.AddLocation(1, 0, "Городские ворота",
                 "Здесь есть ворота, защищающие город от гигантских пауков.",
