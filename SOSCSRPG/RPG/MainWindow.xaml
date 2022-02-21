@@ -259,12 +259,16 @@
                         Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"
                         Content="Север"/>
                 <Button Grid.Row="1" Grid.Column="0"
-                        Height="25" Width="65" Margin="10,0,0,0"
+                        Height="25" Width="65" 
                         Click="OnClick_MoveWest"
                         Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"
                         Content="Запад"/>
+                <Button Grid.Row="1" Grid.Column="1"
+                        Height="25" Width="75"
+                        Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"
+                        Content="Торговец"/>
                 <Button Grid.Row="1" Grid.Column="2"
-                        Height="25" Width="65" Margin="0,0,10,0"
+                        Height="25" Width="65" 
                         Click="OnClick_MoveEast"
                         Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"
                         Content="Восток"/>
