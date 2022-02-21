@@ -29,6 +29,7 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToSouth));
 
+                CompleteQuestsAtLocation();
                 GivePlayerQuestAtLocation();
                 GetMonsterAtLocation();
             }
@@ -125,6 +126,48 @@ namespace Engine.ViewModels
             }
         }
 
+        private void CompleteQuestsAtLocation()
+        {
+            foreach (Quest quest in CurrentLocation.QuestAvailableHere)
+            {
+                QuestStatus questToComplete =
+                    CurrentPlayer.Quest.FirstOrDefault(q => q.PlayerQuest.ID == quest.ID &&
+                                                            !q.IsCompleted);
+                if (questToComplete != null)
+                {
+                    if (CurrentPlayer.HasAllThereItems(quest.ItemsToComplete))
+                    {
+                        foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                        {
+                            for (int i = 0; i < itemQuantity.Quantity; i++)
+                            {
+                                CurrentPlayer.RemoveItemFromInventory(CurrentPlayer.Inventory.FirstOrDefault(item => item.ItemTypeID == itemQuantity.ItemID));
+                            }
+                        }
+
+                        RaiseMessage("");
+                        RaiseMessage($"Ты выполнил задание {quest.Name}.");
+
+                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
+                        RaiseMessage($"Ты получил {quest.RewardExperiencePoints} очков опыта.");
+
+                        CurrentPlayer.Gold += quest.RewardGold;
+                        RaiseMessage($"Ты получил {quest.RewardGold} золота.");
+
+                        foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                        {
+                            GameItem rewardItem = ItemFactory.GreateGameItem(itemQuantity.ItemID);
+
+                            CurrentPlayer.AddItemToInventory(rewardItem);
+                            RaiseMessage($"Ты получил {rewardItem.Name}.");
+                        }
+
+                        questToComplete.IsCompleted = true;
+                    }
+                }
+            }
+        }
+
         private void GivePlayerQuestAtLocation()
         {
             foreach (Quest quest in CurrentLocation.QuestAvailableHere)
@@ -132,6 +175,24 @@ namespace Engine.ViewModels
                 if (!CurrentPlayer.Quest.Any(q => q.PlayerQuest.ID == quest.ID))
                 {
                     CurrentPlayer.Quest.Add(new QuestStatus(quest));
+
+                    RaiseMessage("");
+                    RaiseMessage($"Ты получил задание {quest.Name}.");
+                    RaiseMessage(quest.Description);
+
+                    RaiseMessage("Возвращайся с:");
+                    foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                    {
+                        RaiseMessage($"  {itemQuantity.Quantity} {ItemFactory.GreateGameItem(itemQuantity.ItemID).Name}");
+                    }
+
+                    RaiseMessage("И ты получишь:");
+                    RaiseMessage($"  {quest.RewardExperiencePoints} очков опыта.");
+                    RaiseMessage($"  {quest.RewardGold} золота.");
+                    foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                    {
+                        RaiseMessage($" {itemQuantity.Quantity} {ItemFactory.GreateGameItem(itemQuantity.ItemID).Name}");
+                    }
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace Engine.Models
         public List<ItemQuantity> ItemsToComplete { get; set; }
         public int RewardExperiencePoints { get; set; }
         public int RewardGold { get; set; }
-        public List<ItemQuantity> RewardItem { get; set; }
+        public List<ItemQuantity> RewardItems { get; set; }
 
         public Quest(int id, string name, string description, List<ItemQuantity> itemsToComplete,
                      int rewardExperiencePoints, int rewardGold, List<ItemQuantity> rewardItems)
@@ -25,7 +25,7 @@ namespace Engine.Models
             ItemsToComplete = itemsToComplete;
             RewardExperiencePoints = rewardExperiencePoints;
             RewardGold = rewardGold;
-            RewardItem = rewardItems;
+            RewardItems = rewardItems;
         }
 
 

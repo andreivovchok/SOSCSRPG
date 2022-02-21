@@ -20,7 +20,7 @@ namespace Engine.Factories
                         2, 5,1);
 
                     AddLootItem(snake, 9001,25);
-                    AddLootItem(snake, 9001,75);
+                    AddLootItem(snake, 9002,75);
 
                     return snake;
 
@@ -31,7 +31,7 @@ namespace Engine.Factories
                         2, 5,1);
 
                     AddLootItem(rat, 9003, 25);
-                    AddLootItem(rat, 9003, 75);
+                    AddLootItem(rat, 9004, 75);
 
                     return rat;
 
@@ -42,7 +42,7 @@ namespace Engine.Factories
                         4, 10,3);
 
                     AddLootItem(giantSpider,9005,25);
-                    AddLootItem(giantSpider,9005,75);
+                    AddLootItem(giantSpider,9006,75);
 
                     return giantSpider;
 
