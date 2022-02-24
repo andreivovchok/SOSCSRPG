@@ -165,30 +165,34 @@
               Background="BurlyWood">
 
             <TabControl>
-                <TabItem Header="Inventory">
-                    <DataGrid ItemsSource="{Binding CurrentPlayer.Inventory}"
+                <TabItem Header="Инвентарь">
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Description"
-                                                Binding="{Binding Name}"
+                            <DataGridTextColumn Header="Описание"
+                                                Binding="{Binding Item.Name}"
                                                 Width="*"/>
-                            <DataGridTextColumn Header="Price"
-                                                Binding="{Binding Price}"
+                            <DataGridTextColumn Header="Кол-во"
+                                                IsReadOnly="True"
+                                                Width="Auto"
+                                                Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="Цена"
+                                                Binding="{Binding Item.Price}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
 
-                <TabItem Header="Quests">
+                <TabItem Header="Квест">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Quest}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name"
+                            <DataGridTextColumn Header="Название"
                                                 Binding="{Binding PlayerQuest.Name}"
                                                 Width="*"/>
-                            <DataGridTextColumn Header="Done?"
+                            <DataGridTextColumn Header="Выполнен?"
                                                 Binding="{Binding IsCompleted}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
