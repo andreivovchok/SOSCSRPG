@@ -17,7 +17,7 @@ namespace Engine.ViewModels
         private Trader _currentTrader;
 
         public World CurrentWorld { get; set; }
-        public Player CurrentPlayer 
+        public Player CurrentPlayer
         {
             get => _currentPlayer;
             set
@@ -35,7 +35,7 @@ namespace Engine.ViewModels
                 }
             }
         }
-        public Location CurrentLocation 
+        public Location CurrentLocation
         {
             get => _currentLocation;
             set
@@ -77,7 +77,7 @@ namespace Engine.ViewModels
                 }
 
                 OnPropertyChanged(nameof(CurrentMonster));
-                OnPropertyChanged(nameof(HasMonster));              
+                OnPropertyChanged(nameof(HasMonster));
             }
         }
 
@@ -95,21 +95,21 @@ namespace Engine.ViewModels
 
         public Weapon CurrentWeapon { get; set; }
 
-        public bool HasLocationToNorth => 
+        public bool HasLocationToNorth =>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
 
 
-        public bool HasLocationToWest => 
+        public bool HasLocationToWest =>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
 
 
-        public bool HasLocationToEast => 
+        public bool HasLocationToEast =>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
 
 
-        public bool HasLocationToSouth => 
+        public bool HasLocationToSouth =>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
-        
+
 
         public bool HasMonster => CurrentMonster != null;
 
@@ -127,7 +127,7 @@ namespace Engine.ViewModels
             CurrentWorld = WorldFactory.CreateWorld();
 
             CurrentLocation = CurrentWorld.LocationAt(0, -1);
-        }       
+        }
 
         public void MoveNorth()
         {
@@ -188,7 +188,7 @@ namespace Engine.ViewModels
                         CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
                         RaiseMessage($"Ты получил {quest.RewardExperiencePoints} очков опыта.");
 
-                        CurrentPlayer.Gold += quest.RewardGold;
+                        CurrentPlayer.ReceiveGold(quest.RewardGold);
                         RaiseMessage($"Ты получил {quest.RewardGold} золота.");
 
                         foreach (ItemQuantity itemQuantity in quest.RewardItems)
@@ -260,27 +260,12 @@ namespace Engine.ViewModels
             }
             else
             {
-                CurrentMonster.CurrentHitPoints -= damageToMonster;
                 RaiseMessage($"Ты нанес {CurrentMonster.Name} {damageToMonster} урона.");
+                CurrentMonster.TakeDamage(damageToMonster);
             }
 
-            if (CurrentMonster.CurrentHitPoints <= 0)
+            if (CurrentMonster.IsDead)
             {
-                RaiseMessage("");
-                RaiseMessage($"Ты победил {CurrentMonster.Name}.");
-
-                CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
-                RaiseMessage($"Ты получил {CurrentMonster.RewardExperiencePoints} очков опыта.");
-
-                CurrentPlayer.Gold += CurrentMonster.Gold;
-                RaiseMessage($"Ты получил {CurrentMonster.Gold} золота.");
-
-                foreach (GameItem gameItem in CurrentMonster.Inventory)
-                {
-                    CurrentPlayer.AddItemToInventory(gameItem);
-                    RaiseMessage($"Ты получил один {gameItem.Name}.");
-                }
-
                 GetMonsterAtLocation();
             }
             else
@@ -293,18 +278,37 @@ namespace Engine.ViewModels
                 }
                 else
                 {
-                    CurrentPlayer.CurrentHitPoints -= damageToPlayer;
                     RaiseMessage($"{CurrentMonster.Name} нанес тебе {damageToPlayer} урона.");
+                    CurrentPlayer.TakeDamage(damageToPlayer);
                 }
+            }
+        }
 
-                if (CurrentPlayer.CurrentHitPoints <= 0)
-                {
-                    RaiseMessage("");
-                    RaiseMessage($"{CurrentMonster.Name} убил тебя.");
+        private void OnCurrentPlayerKilled(object sender, EventArgs eventArgs)
+        {
+            RaiseMessage("");
+            RaiseMessage($"{CurrentMonster.Name} убил тебя.");
 
-                    CurrentLocation = CurrentWorld.LocationAt(0, -1);
-                    CurrentPlayer.CurrentHitPoints = CurrentPlayer.Level * 10;
-                }
+            CurrentLocation = CurrentWorld.LocationAt(0, -1);
+            CurrentPlayer.CompletelyHeal();
+        }
+
+        private void OnCurrentMonsterKilled(object sender, EventArgs eventArgs)
+        {
+            RaiseMessage("");
+            RaiseMessage($"Ты победил {CurrentMonster.Name}.");
+
+            RaiseMessage($"Ты получил {CurrentMonster.RewardExperiencePoints} очков опыта.");
+            CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
+
+            RaiseMessage($"Ты получил {CurrentMonster.Gold} золота.");
+            CurrentPlayer.ReceiveGold(CurrentMonster.Gold);
+
+            foreach (GameItem gameItem in CurrentMonster.Inventory)
+            {
+                CurrentPlayer.AddItemToInventory(gameItem);
+                RaiseMessage($"Ты получил один {gameItem.Name}.");
+
             }
         }
     }
