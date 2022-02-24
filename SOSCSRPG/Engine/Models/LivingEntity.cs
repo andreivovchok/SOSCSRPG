@@ -56,12 +56,15 @@ namespace Engine.Models
 
         public ObservableCollection<GameItem> Inventory { get; set; }
 
+        public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; set; }
+
         public List<GameItem> Weapons =>
             Inventory.Where(i => i is Weapon).ToList();
 
         public LivingEntity()
         {
             Inventory = new ObservableCollection<GameItem>();
+            GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
 
         public void AddItemToInventory(GameItem item)
