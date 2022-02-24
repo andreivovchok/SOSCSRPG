@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Models
 {
@@ -76,6 +74,47 @@ namespace Engine.Models
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
 
+        public void TakeDamage(int hitPointsOfDamage)
+        {
+            CurrentHitPoints -= hitPointsOfDamage;
+
+            if (IsDead)
+            {
+                CurrentHitPoints = 0;
+                RaiseOnKilledEvent();
+            }
+        }
+
+        public void Heal(int hitPointsToHeal)
+        {
+            CurrentHitPoints += hitPointsToHeal;
+
+            if (CurrentHitPoints > MaximumHitPoints)
+            {
+                CurrentHitPoints = MaximumHitPoints;
+            }
+        }
+
+        public void CompletelyHeal()
+        {
+            CurrentHitPoints = MaximumHitPoints;
+        }
+
+        public void ReceiveGold(int amountOfGold)
+        {
+            Gold += amountOfGold;
+        }
+
+        public void SpendGold(int amountOfGold)
+        {
+            if (amountOfGold > Gold)
+            {
+                throw new ArgumentOutOfRangeException($"У {Name} есть только {Gold} золота, невозможно потратить {amountOfGold} золота");
+            }
+
+            Gold -= amountOfGold;
+        }
+
         public void AddItemToInventory(GameItem item)
         {
             Inventory.Add(item);
@@ -117,6 +156,11 @@ namespace Engine.Models
             }
 
             OnPropertyChanged(nameof(Weapons));
+        }
+
+        private void RaiseOnKilledEvent()
+        {
+            OnKilled?.Invoke(this, new EventArgs());
         }
     }
 }

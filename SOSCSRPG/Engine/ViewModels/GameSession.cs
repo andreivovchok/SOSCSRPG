@@ -1,9 +1,9 @@
 ﻿using Engine.Models;
 using Engine.Factories;
-using Engine.EventArgs;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using Engine.EventArguments;
 
 namespace Engine.ViewModels
 {

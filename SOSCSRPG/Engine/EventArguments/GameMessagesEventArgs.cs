@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine.EventArgs
+namespace Engine.EventArguments
 {
-    public class GameMessagesEventArgs : System.EventArgs
+    public class GameMessagesEventArgs : EventArgs
     {
         public string Message { get; private set; }
 

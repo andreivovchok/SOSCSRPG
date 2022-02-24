@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Documents;
-using Engine.EventArgs;
+using Engine.EventArguments;
 using Engine.ViewModels;
 
 namespace RPG
