@@ -150,7 +150,7 @@
                                 Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
-                        <TextBlock>Current His Points:</TextBlock>
+                        <TextBlock>Текущие очки жизни:</TextBlock>
                         <TextBlock Text="{Binding CurrentMonster.CurrentHitPoints}"/>
                     </StackPanel>
 
@@ -237,7 +237,7 @@
                           SelectedValuePath="ID"/>
 
                 <Button Grid.Row="0" Grid.Column="2"
-                        Content="Use"
+                        Content="Бой"
                         Click="OnClick_AttackMonster"/>
 
             </Grid>
