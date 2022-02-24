@@ -17,7 +17,7 @@ namespace Engine.Models
         public string Name
         {
             get => _name;
-            set
+            private set
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
@@ -27,7 +27,7 @@ namespace Engine.Models
         public int CurrentHitPoints
         {
             get => _currentHitPoints;
-            set
+            private set
             {
                 _currentHitPoints = value;
                 OnPropertyChanged(nameof(CurrentHitPoints));
@@ -37,7 +37,7 @@ namespace Engine.Models
         public int MaximumHitPoints
         {
             get => _maximumHitPoints;
-            set
+            private set
             {
                 _maximumHitPoints = value;
                 OnPropertyChanged(nameof(MaximumHitPoints));
@@ -47,7 +47,7 @@ namespace Engine.Models
         public int Gold
         {
             get => _gold;
-            set
+            private set
             {
                 _gold = value;
                 OnPropertyChanged(nameof(Gold));
