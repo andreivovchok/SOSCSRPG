@@ -11,12 +11,30 @@ namespace Engine.ViewModels
     {
         public event EventHandler<GameMessagesEventArgs> OnMessageRaised;
 
+        private Player _currentPlayer;
         private Location _currentLocation;
         private Monster _currentMonster;
         private Trader _currentTrader;
 
         public World CurrentWorld { get; set; }
-        public Player CurrentPlayer { get; set; }
+        public Player CurrentPlayer 
+        {
+            get => _currentPlayer;
+            set
+            {
+                if (_currentPlayer != null)
+                {
+                    _currentPlayer.OnKilled -= OnCurrentPlayerKilled;
+                }
+
+                _currentPlayer = value;
+
+                if (_currentPlayer != null)
+                {
+                    _currentPlayer.OnKilled += OnCurrentPlayerKilled;
+                }
+            }
+        }
         public Location CurrentLocation 
         {
             get => _currentLocation;
@@ -41,18 +59,25 @@ namespace Engine.ViewModels
         public Monster CurrentMonster
         {
             get => _currentMonster;
-            private set
+            set
             {
-                _currentMonster = value;
+                if (_currentMonster != null)
+                {
+                    _currentMonster.OnKilled -= OnCurrentMonsterKilled;
+                }
 
-                OnPropertyChanged(nameof(CurrentMonster));
-                OnPropertyChanged(nameof(HasMonster));
+                _currentMonster = value;
 
                 if (CurrentMonster != null)
                 {
+                    _currentMonster.OnKilled += OnCurrentMonsterKilled;
+
                     RaiseMessage("");
                     RaiseMessage($"Здесь ты видешь {CurrentMonster.Name}");
                 }
+
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));              
             }
         }
 
@@ -92,18 +117,12 @@ namespace Engine.ViewModels
 
         public GameSession()
         {
-            CurrentPlayer = new Player
-            {
-                Name = "Scott",
-                CharacterClass = "Fighter",
-                CurrentHitPoints = 10,
-                MaximumHitPoints = 10,
-                Gold = 10000000,
-                ExperiencePoints = 0,
-                Level = 1
-            };
+            CurrentPlayer = new Player("Scott", "Fighter", 0, 10, 10, 1000000);
 
-            CurrentPlayer.AddItemToInventory(ItemFactory.GreateGameItem(1001));
+            if (!CurrentPlayer.Weapons.Any())
+            {
+                CurrentPlayer.AddItemToInventory(ItemFactory.GreateGameItem(1001));
+            }
 
             CurrentWorld = WorldFactory.CreateWorld();
 
