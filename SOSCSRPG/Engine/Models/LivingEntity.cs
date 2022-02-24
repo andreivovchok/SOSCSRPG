@@ -61,8 +61,17 @@ namespace Engine.Models
         public List<GameItem> Weapons =>
             Inventory.Where(i => i is Weapon).ToList();
 
-        public LivingEntity()
+        public bool IsDead => CurrentHitPoints <= 0;
+
+        public event EventHandler OnKilled;
+
+        public LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold)
         {
+            Name = name;
+            MaximumHitPoints = maximumHitPoints;
+            CurrentHitPoints = currentHitPoints;
+            Gold = gold;
+
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
