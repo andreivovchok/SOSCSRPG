@@ -192,7 +192,7 @@
                             <DataGridTextColumn Header="Название"
                                                 Binding="{Binding PlayerQuest.Name}"
                                                 Width="*"/>
-                            <DataGridTextColumn Header="Выполнен?"
+                            <DataGridTextColumn Header="Готово?"
                                                 Binding="{Binding IsCompleted}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
@@ -225,7 +225,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="160"/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
